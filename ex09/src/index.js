@@ -1,53 +1,60 @@
-const users = [
+const { find } = require('lodash');
+const _ = require('lodash');
+var users = [
     {
-        firstName: "John",
+        id: 1,
+        fistName: "John",
         lastName: "Doe",
         age: 24,
         gender: "male"
     },
     {
-        firstName: "Jane",
+        id: 2,
+        fistName: "Jane",
         lastName: "Doe",
         age: 5,
         gender: "female"
     },
     {
-        firstName: "Jim",
+        id: 3,
+        fistName: "Jim",
         lastName: "Carrey",
         age: 54,
         gender: "male"
     },
     {
-        firstName: "Kate",
+        id: 4,
+        fistName: "Kate",
         lastName: "Winslet",
         age: 40,
         gender: "female"
     }
 ];
-
-function getUsers(){
+function getUsers() {
     var output = "";
-
-    for(let i=0; i<users.length; i++){
-        console.log(users[i]);
+    for(var i = 0; i < users.length; i++) {
+        output += `${users[i].id} - ${users[i].fistName} ${users[i].lastName} is ${users[i].age}, ${users[i].gender}\n`;
     }
     console.log(output);
     return output;
 }
-function findUserById(id){
-    try{
-        var user = _.users(id);
-
-        var iFindUser = user;
-
+function findUserById(id) {
+    try {
+        var user = _.find(users, {id});
+        var iFindUser = `${user.id} - ${user.fistName} ${user.lastName} is ${user.age}, ${user.gender}\n`;
+        console.log(iFindUser);
         return iFindUser;
+        
     } catch (error) {
-        return error.message;
+        console.log("Cannot read property 'id'");
+        return "Cannot read property 'id'";
     }
+    
 }
-
-console.log(getUsers());
 getUsers();
-console.log(findUserById(users.firstName, users.gender));
-findUserById(users);
+findUserById(1);
+findUserById(2);
+findUserById(3);
+findUserById(4);
+findUserById(0);
 module.exports = findUserById;
