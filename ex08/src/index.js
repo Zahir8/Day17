@@ -1,58 +1,52 @@
-const users = [
+const _ = require('lodash');
+var users = [
     {
-        firstName: "John",
+        fistName: "John",
         lastName: "Doe",
         age: 24,
         gender: "male"
     },
     {
-        firstName: "Jane",
+        fistName: "Jane",
         lastName: "Doe",
         age: 5,
         gender: "female"
     },
     {
-        firstName: "Jim",
+        fistName: "Jim",
         lastName: "Carrey",
         age: 54,
         gender: "male"
     },
     {
-        firstName: "Kate",
+        fistName: "Kate",
         lastName: "Winslet",
         age: 40,
         gender: "female"
     }
 ];
-
 function getUsers() {
-
     var output = "";
-
-    for(let i=0; i<users.length; i++){
-        console.log(users[i]);
-    }
+    for(var i = 0; i < users.length; i++) {
+        output += `${users[i].fistName} ${users[i].lastName} is ${users[i].age}, ${users[i].gender}\n`;
+    }  
     console.log(output);
     return output;
-};
-
+}
 function findUser(lastName, gender) {
-    try{
-        var user = _.users(lastName, gender);
-
-        var iFindUser = {firstName} + {lastName} + "is" + {age} + ", " + {gender};
-
+    try {
+        var user = _.find(users, { lastName, gender});
+        var iFindUser = `${user.fistName} ${user.lastName} is ${user.age}, ${user.gender}\n`;
         console.log(iFindUser);
-
         return iFindUser;
     } catch (error) {
-        error = "Cannot read property 'firstName' of undefined";
-        console.log(error.message);
-        return error.message;
+        console.log("Cannot read property 'fistName' of undefined");
+        return "Cannot read property '/fistName'/ of undefined";
     }
 }
-console.log(getUsers());
 getUsers();
-console.log(findUser(users.firstName, users.gender));
-findUser(users);
+findUser("Doe", "male");
+findUser("Doe", "female");
+findUser("Carrey", "male");
+findUser("Winslet", "female");
 module.exports = findUser;
